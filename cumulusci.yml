@@ -1,0 +1,31 @@
+# This is a sample, future looking configuration file for use with CumulusCI 2.0 and mrbelvedere 2.0 (safe harbor!)
+# This file would replace the cumulusci.properties and version.properties files and allow mrbelvedere 2.0 to easily
+# inspect the repository to build the installation map for the web based installer
+project:
+    name: CumulusCI-Test
+    namespace: ccitest
+    dependencies:
+        pre:
+            - name: Account Record Types
+              description: Installs the Household Account and Organization record types on Account
+              # Path to a subfolder of the repo containing a metadata deployment package
+              path: unpackaged/pre/account_record_types 
+              # Available option types: required, default, optional
+              option_type: default 
+            - name: Account Picklist Values for (pub)
+              description: Installs standard picklist values for Account.Type and Account.AccountSource
+              path: unpackaged/pub/pre/account_picklist_values
+              option_type: default
+            - name: Power of Us Hub (pub)
+              description: Creates an Application and a Tab allowing access to the Salesforce.org Power of Us Hub
+              # Managed package namespace
+              namespace: pub
+              # Managed package version number
+              version: 1.5
+        post:
+            - name: Salesforce1 Configuration for CumulusCI-Test
+              description: Configures the CumulusCI-Test fields and objects in the Salesforce1 app layouts
+              # Require users to verify this option if selected
+              warning: This will overwrite your existing Salesforce1 configuration.  Are you sure you want to overwrite your existing Salesforce1 Configuration?
+              path: unpackaged/post/salesforce1
+              option_type: optional
